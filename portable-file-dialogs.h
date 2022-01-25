@@ -1113,7 +1113,13 @@ inline internal::file_dialog::file_dialog(type in_type,
         }
 
         if (default_path.size())
-            script += " default location " + osascript_quote(default_path);
+        {
+            if (in_type == type::save)
+                script += " default name ";
+            else
+                script += " default location ";
+            script += osascript_quote(default_path);
+        }
         script += " with prompt " + osascript_quote(title);
 
         if (in_type == type::open)
